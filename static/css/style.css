@@ -1,0 +1,57 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.sidebar {
+    position: fixed;
+    height: 100%;
+}
+
+.content-wrapper {
+    margin-left: 220px;
+    padding: 20px;
+}
+
+.navbar {
+    margin-bottom: 2rem;
+}
+
+.card {
+    margin-top: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #007bff;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.footer {
+    margin-top: 3rem;
+    text-align: center;
+    color: #6c757d;
+}
+
+.logos img {
+    max-width: 100%;
+}
+
+.sponsors img {
+    max-width: 150px;
+    margin-right: 15px;
+}

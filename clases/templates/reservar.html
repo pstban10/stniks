@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+
+<div class="card mx-auto" style="width: 80rem;">
+    <div class="card-header text-center">
+        Reserva tu clase
+    </div>
+    <form id='formulario-clase-de-prueba'>
+        {% csrf_token %}
+        <label for='full_name' class="form-label">Nombre y Apellido:</label><br />
+        <input type='text' id='full_name' class="form-control">
+        <br />        
+        <label for='phone' class="form-label">Numero de contacto:</label><br />
+        <input type='number' id='phone' class="form-control">
+        <br />
+        <label for='date' class="form-label">que día?:</label><br />
+        <input type='date' id="date" name="date" class="form-control" min="{% now "Y-m-d" %}">
+        <br />
+        <label for='hour' class="form-label">Elige el horario:</label><br />
+        <select id='hour' class="form-control"></select>
+    </form>
+    <button class='btn btn-primary' onclick='obtenerDatosFormulario()'>Reservar</button>
+
+        <div class="card-footer text-body-secondary text-center">
+          Si quieres <a href={% url 'inicio' %}>vuelve al inicio</a>
+        </div>
+      </div> 
+
+<div class="container mb-3">
+
+
+</div>
+<script src="{% static 'js/reserva.js' %}"></script>
+
+
+
+
+
+{% endblock %}
