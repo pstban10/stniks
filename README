@@ -4,21 +4,48 @@ Calistenia con Esteban
 la app clases se encargará de:
 SIN INICIAR SESIÓN: 
 - Poder reservar una clase de Calistenia Gratis
-- Ver horarios
-- ver galeria de fotos y videos de las clases
-- Ver tabla de RM's y metricas
-- Información de la Calistenia y beneficios de entrenar conmigo
-- Enlace con Tienda SSG
+Casi listo, hay que agregar un mensaje de éxito y notificar a quien corresponda de la existencia de la clase de prueba
 
+- Ver horarios
+Hay que hacer imagen con el logo y con los horarios disponibles para las clases
+
+- ver galeria de fotos y videos de las clases
+No sé como hacer esto
+
+- Información de la Calistenia y beneficios de entrenar conmigo
+Esto es todo frontend
+
+- Enlace con Tienda SSG
+Hay que crear otra web especial para la tienda
 
 
 La app data se encargará de:
 INICIANDO SESIÓN:
 - Perfil del alumno
-- Armador de rutinas
+. . Info de fecha de inicio del entrenamiento
+. . Si posee suscripcion activa
+. . Sus registros de fuerza (tambien acceso a los registros generales)
+. . Rutina del día
+
+- Ver tabla de PR's y metricas 
+. . Hay que cambiar tabla de  RM (repetición maxima) a PR (Personal record)
+. . Renderizar de forma ordenada los registros, de mayor a menor.
+. . Mostrar los PR donde el peso agregado al ejercicio sea mayor a forma de top 10
+. . Crear calculadora para obtener
+. . . RM
+. . . ganancia de fuerza entre una fecha y otra
+
+- Armador de rutinas inteligente
+. Crear tabla en base de datos para los ejercicios con los siguientes datos
+. . id, nombre, tipo de ejercicio, dificultad
+. crear reglas para el armado de rutinas (por ejemplo los tipos de ejercicios a combinar para armar la rutina)
+. armar rutina
+(se como se va a hacer, pero no lo tengo del todo claro tecnicamente)
+
 - Página de recomendaciones generales de entrenamiento
 - pasarela de pago con distintos medios de pago
-- Ver tabla de RM's y metricas
+(ni idea de como hacer esto)
+
 - descuentos en indumentaria SSG
 
 
