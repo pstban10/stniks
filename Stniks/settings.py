@@ -41,6 +41,7 @@ DJANGO_APPS = [
 PROJECT_APPS = [
     'data',
     'clases',
+    'training',
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",

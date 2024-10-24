@@ -34,7 +34,7 @@ class DateOfMedition(models.Model):
         return f"{dia:02d} de {mes} del {año}"
 
 
-class RmData(models.Model):
+class PrData(models.Model):
     user = models.ForeignKey(Persona, on_delete=models.CASCADE)
     user_weight = models.FloatField(null=True, blank=True)
     date = models.ForeignKey(DateOfMedition, on_delete=models.PROTECT)

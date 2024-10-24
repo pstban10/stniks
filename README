@@ -18,6 +18,11 @@ Esto es todo frontend
 - Enlace con Tienda SSG
 Hay que crear otra web especial para la tienda
 
+- Página de recomendaciones generales de entrenamiento
+
+- pasarela de pago con distintos medios de pago
+(ni idea de como hacer esto)
+
 
 La app data se encargará de:
 INICIANDO SESIÓN:
@@ -35,6 +40,7 @@ INICIANDO SESIÓN:
 . . . RM
 . . . ganancia de fuerza entre una fecha y otra
 
+la app 'training' se encargará de:
 - Armador de rutinas inteligente
 . Crear tabla en base de datos para los ejercicios con los siguientes datos
 . . id, nombre, tipo de ejercicio, dificultad
@@ -42,14 +48,8 @@ INICIANDO SESIÓN:
 . armar rutina
 (se como se va a hacer, pero no lo tengo del todo claro tecnicamente)
 
-- Página de recomendaciones generales de entrenamiento
-- pasarela de pago con distintos medios de pago
-(ni idea de como hacer esto)
 
-- descuentos en indumentaria SSG
-
-
-TIENDA StreetSquad.Gear
+TIENDA StreetSquad.Gear (esto será un proyecto separado)
 - Clasificación de productos
 - Barra de busqueda
 - Carrito de compras

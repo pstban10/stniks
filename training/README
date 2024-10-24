@@ -1,0 +1,18 @@
+Esta app se encargara de generar Rutinas de entrenamiento para los alumnos
+En esta seccion tendré que crear un armador de rutinas con machine learning (esa es la idea)
+
+los pasos serían
+- Crear una tabla para almacenar los ejercicio con los siguientes datos
+. . tipo de ejercicio
+. . dificultad
+. . correcta ejecución
+
+- Listar todos los ejercicios posibles y categorizarlos por tipos de ejercicio
+
+- definir reglas para el armador de rutinas
+. . no combinar 2 ejercicios del mismo tipo en cada rutina
+. . agregar un máximo de 4 ejercicios por cada serie
+. . repetir un máximo de 6 rounds por cada serie
+. . (no se me ocurren muchas mas cosas de momento, pero algo así serán las reglas)
+
+- Entrenar al armador de rutinas con rutinas de ejemplo
