@@ -10,7 +10,7 @@ Casi listo, hay que agregar un mensaje de éxito y notificar a quien corresponda
 Hay que hacer imagen con el logo y con los horarios disponibles para las clases
 
 - ver galeria de fotos y videos de las clases
-No sé como hacer esto
+(No sé como hacer esto)
 
 - Información de la Calistenia y beneficios de entrenar conmigo
 Esto es todo frontend
@@ -19,18 +19,21 @@ Esto es todo frontend
 Hay que crear otra web especial para la tienda
 
 - Página de recomendaciones generales de entrenamiento
-
-- pasarela de pago con distintos medios de pago
+- Posibilidad de crear una cuenta con diferentes métodos y rrss
+- pasarela de pago con distintos medios de pago para suscripciones a los distintos planes
 (ni idea de como hacer esto)
 
 
-La app data se encargará de:
-INICIANDO SESIÓN:
+La app "data" se encargará de:
+. autenticacion de usuarios con la libreria allauth (para poder usar varios metodos de inicio de sesión y crear perfiles)
+luego de iniciar sesión:
 - Perfil del alumno
 . . Info de fecha de inicio del entrenamiento
 . . Si posee suscripcion activa
 . . Sus registros de fuerza (tambien acceso a los registros generales)
 . . Rutina del día
+
+
 
 - Ver tabla de PR's y metricas 
 . . Hay que cambiar tabla de  RM (repetición maxima) a PR (Personal record)

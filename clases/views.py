@@ -35,3 +35,10 @@ def clase_de_prueba(request):
         'reservar.html',
         data
     )
+
+
+def ver_horarios(request):
+    return render(
+        request,
+        'horarios.html'
+    )

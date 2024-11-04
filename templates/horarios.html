@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+
+<div class="card mx-auto" style="width: 80rem;">
+    <div class="card-header text-center">
+        Nuestros horarios
+        <img src={% static "imgs/horarios.png" %} class="img-fluid" alt="Responsive image" />
+    </div>
+
+    
+        <div class="card-footer text-body-secondary text-center">
+          Si quieres <a href={% url 'inicio' %}>vuelve al inicio</a>
+        </div>
+      </div> 
+
+<div class="container mb-3">
+
+
+</div>
+
+{% endblock %}
