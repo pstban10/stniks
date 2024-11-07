@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center" style="font-family: 'Oswald', sans-serif;">Editar Registro de Marca Personal</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm p-4">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        <a href="{% url 'records' %}" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Estilos personalizados -->
+<style>
+    body {
+        font-family: 'Oswald', sans-serif;
+    }
+    .card {
+        border: none;
+        border-radius: 8px;
+    }
+    .btn-primary {
+        background-color: #d9534f;
+        border-color: #d9534f;
+    }
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+</style>
+{% endblock %}

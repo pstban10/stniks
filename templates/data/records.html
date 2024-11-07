@@ -1,0 +1,101 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center" style="font-family: 'Oswald', sans-serif;">Records de Marcas Personales</h2>
+    
+    <!-- Filtros -->
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Buscar por nombre de usuario" id="userFilter">
+        </div>
+        <div class="col-md-6">
+            <input type="date" class="form-control" id="dateFilter">
+        </div>
+    </div>
+
+    <!-- Tabla de registros -->
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Pull-Ups</th>
+                    <th scope="col">Peso en Pull-Ups (kg)</th>
+                    <th scope="col">Paralel Dips</th>
+                    <th scope="col">Peso en Paralel Dips (kg)</th>
+                    <th scope="col">Fecha</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in object_list %}
+                <tr>
+                    <td>{{ record.user.user.username }}</td>
+                    <td>{{ record.pull_up }}</td>
+                    <td>{{ record.pull_up_weight }}</td>
+                    <td>{{ record.paralel_dips }}</td>
+                    <td>{{ record.paralel_dips_weight }}</td>
+                    <td>{{ record.date }}</td>
+                    {% if user.is_superuser %}
+                    <td>
+                        <!-- Botón de edición -->
+                        <a href="{% url 'edit_record' record.id %}" class="btn btn-outline-secondary btn-sm" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
+                    {%endif%}
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">No hay registros disponibles</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if user.is_superuser %}
+        <div class="mb-3 text-right">
+            <button class="btn btn-danger">Agregar Registro</button>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Estilos personalizados -->
+<style>
+    body {
+        font-family: 'Oswald', sans-serif;
+    }
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(255, 0, 0, 0.05);
+    }
+    .table-dark {
+        background-color: #343a40;
+        color: #fff;
+    }
+    .table-responsive {
+        overflow-x: auto;
+    }
+</style>
+
+<!-- Scripts de filtro -->
+<script>
+    // Filtrado en la tabla
+    document.getElementById('userFilter').addEventListener('input', function() {
+        const filter = this.value.toLowerCase();
+        document.querySelectorAll('tbody tr').forEach(row => {
+            const userCell = row.querySelector('td').textContent.toLowerCase();
+            row.style.display = userCell.includes(filter) ? '' : 'none';
+        });
+    });
+
+    document.getElementById('dateFilter').addEventListener('change', function() {
+        const filterDate = this.value;
+        // Aquí puedes agregar el código necesario para filtrar por fecha,
+        // dependiendo de cómo tienes configurada la fecha en el modelo.
+    });
+</script>
+
+{% endblock %}
+

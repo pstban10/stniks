@@ -21,15 +21,23 @@
             <li class="nav-item">
                 <a href="{% url 'inicio' %}" class="nav-link text-white">Inicio</a>
             </li>
+            <li class="nav-item">
+                <a href="{% url 'records' %}" class="nav-link text-white">Records</a>
+            </li>
             <li>
-                <a href="admin" class="nav-link text-white">Admin</a>
+                <a href='#'class="nav-link text-white">Admin</a>
             </li>
             <li>
                 <a href={%url 'ver_horarios'%} class="nav-link text-white">Galería</a>
             </li>
             <li>
-                <a href="{% url 'reservar' %}" class="nav-link text-white">Reserva una clase GRATIS</a>
+                <a href={% url 'reservar' %} class="nav-link text-white">Reserva una clase GRATIS</a>
             </li>
+            {%if user.is_authenticated%}
+            <li>
+                <a href={% url 'profile' %} class="nav-link text-white">Ver Tu Perfil</a>
+            </li>
+            {%endif%}
         </ul>
     </div>
     <div class="content-wrapper">

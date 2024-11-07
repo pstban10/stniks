@@ -1,5 +1,6 @@
 from django.db import models
-from django.utils import timezone
+from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
 
 SEX_CHOICES = [
     ('M', 'Masculino'),
@@ -9,15 +10,13 @@ SEX_CHOICES = [
 
 
 class Persona(models.Model):
-    first_name = models.CharField(max_length=50, null=False, blank=False)
-    last_name = models.CharField(max_length=50)
+    user = models.OneToOneField(
+        User, verbose_name="Usuario", on_delete=models.CASCADE)
     sex = models.CharField(max_length=1, choices=SEX_CHOICES)
     age = models.IntegerField()
-    created_on = models.DateTimeField(default=timezone.now)
-    is_active = models.BooleanField()
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.user.first_name}"
 
 
 class DateOfMedition(models.Model):
@@ -46,4 +45,4 @@ class PrData(models.Model):
     skater_squat_weight = models.FloatField(null=True, blank=True)
 
     def __str__(self):
-        return f"los RM's de {self.user.first_name} {self.user.last_name}"
+        return f"los RM's de {self.user.user.username}"

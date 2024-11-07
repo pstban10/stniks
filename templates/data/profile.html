@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h2>Perfil de Usuario</h2>
+        </div>
+        <div class="card-body">
+            <p><strong>Nombre:</strong> {{ perfil.first_name }} {{ perfil.last_name }}</p>
+            <p><strong>Edad:</strong> {{ perfil.age }}</p>
+            <p><strong>Usuario:</strong> {{ perfil.user.username }}</p>
+            <p><strong>Fecha de creación:</strong> {{ perfil.date_joined }}</p>
+        </div>
+    </div>
+    <div class="mt-3 d-flex justify-content-end">
+        <a href="{% url 'account_logout' %}" class="btn btn-danger me-2">Cerrar sesión</a>
+        <a href="{% url 'inicio' %}" class="btn btn-secondary">Volver al inicio</a>
+    </div>
+</div>
+{% endblock %}
