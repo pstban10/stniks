@@ -1,5 +1,12 @@
-body {
-    background-color: #f8f9fa;
+body,
+html {
+    height: 100%;
+    margin: 0;
+    background-color: #000;
+    color: #fff;
+    font-family: "Bangers", system-ui;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .sidebar {
@@ -9,7 +16,14 @@ body {
 
 .content-wrapper {
     margin-left: 220px;
-    padding: 20px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content {
+    flex-grow: 1
 }
 
 .navbar {
@@ -51,7 +65,25 @@ body {
     max-width: 100%;
 }
 
-.sponsors img {
-    max-width: 150px;
-    margin-right: 15px;
+#navbar {
+    background-color: #000000;
+}
+
+#navbar-tittle {
+    font-weight: 90px;
+}
+
+#items-navbar {
+    margin-top: 50%;
+}
+
+#logo-navbar {
+    max-width: 160px;
+    max-height: 90px;
+    margin: 0 auto;
+}
+
+#info {
+    background-color: #000000;
+    color: #fff;
 }

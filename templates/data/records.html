@@ -2,16 +2,13 @@
 {% load static %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2 class="text-center" style="font-family: 'Oswald', sans-serif;">Records de Marcas Personales</h2>
+<div class="container">
+    <h2 class="text-center">Records de Marcas Personales</h2>
     
     <!-- Filtros -->
     <div class="row mb-3">
         <div class="col-md-6">
-            <input type="text" class="form-control" placeholder="Buscar por nombre de usuario" id="userFilter">
-        </div>
-        <div class="col-md-6">
-            <input type="date" class="form-control" id="dateFilter">
+            <input type="text" id="userFilter" placeholder="Filtrar por usuario" class="form-control mb-3">
         </div>
     </div>
 
@@ -23,21 +20,23 @@
                     <th scope="col">Usuario</th>
                     <th scope="col">Pull-Ups</th>
                     <th scope="col">Peso en Pull-Ups (kg)</th>
+                    <th scope="col">RM en Pull Up (kg)</th>
                     <th scope="col">Paralel Dips</th>
                     <th scope="col">Peso en Paralel Dips (kg)</th>
-                    <th scope="col">Fecha</th>
+                    <th scope="col">RM Fondos (aprox)</th>
 
                 </tr>
             </thead>
-            <tbody>
-                {% for record in object_list %}
+            <tbody id='recordsTableBody' class="table-dark">
+                {% for record in object_list|slice:":10"  %}
                 <tr>
-                    <td>{{ record.user.user.username }}</td>
+                    <td>{{ record.user.name }}</td>
                     <td>{{ record.pull_up }}</td>
                     <td>{{ record.pull_up_weight }}</td>
+                    <td>{{ record.maxRepPullUp }}</td>
                     <td>{{ record.paralel_dips }}</td>
                     <td>{{ record.paralel_dips_weight }}</td>
-                    <td>{{ record.date }}</td>
+                    <td>{{ record.maxRepParalelDips }}</td>
                     {% if user.is_superuser %}
                     <td>
                         <!-- Botón de edición -->
@@ -56,17 +55,16 @@
         </table>
         {% if user.is_superuser %}
         <div class="mb-3 text-right">
-            <button class="btn btn-danger">Agregar Registro</button>
+            <a href={% url 'add_user' %}><button class="btn btn-primary">Agregar Usuario</button></a>
+            <a href={% url 'add_record' %}><button class="btn btn-primary">Agregar Registro</button></a>
         </div>
+    
         {% endif %}
     </div>
 </div>
 
 <!-- Estilos personalizados -->
 <style>
-    body {
-        font-family: 'Oswald', sans-serif;
-    }
     .table-striped tbody tr:nth-of-type(odd) {
         background-color: rgba(255, 0, 0, 0.05);
     }
@@ -80,22 +78,62 @@
 </style>
 
 <!-- Scripts de filtro -->
-<script>
-    // Filtrado en la tabla
-    document.getElementById('userFilter').addEventListener('input', function() {
-        const filter = this.value.toLowerCase();
-        document.querySelectorAll('tbody tr').forEach(row => {
-            const userCell = row.querySelector('td').textContent.toLowerCase();
-            row.style.display = userCell.includes(filter) ? '' : 'none';
+<script> 
+    function calculateRM(weight, reps) {
+        if (weight && reps) {
+            return Math.floor(weight / (1.0278 - (0.0278 * reps)));
+        }
+        return 0;
+    }
+
+
+    // Asegúrate de que el DOM esté completamente cargado antes de ejecutar el script 
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('userFilter').addEventListener('input', function () {
+            const filter = this.value.toLowerCase();
+            fetch(`/user/filter_records/?query=${filter}`)
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('recordsTableBody');
+                    if (tableBody) {
+                        // Limpiar la tabla existente
+                        tableBody.innerHTML = '';
+    
+                        // Ordenar registros por 'parallelDipsRM' de mayor a menor
+                        const sortedRecords = data.records.sort((a, b) => {
+                            const aRM = calculateRM(a.paralel_dips_weight, a.paralel_dips);
+                            const bRM = calculateRM(b.paralel_dips_weight, b.paralel_dips);
+                            return bRM - aRM; // De mayor a menor
+                        });
+    
+                        // Limitar a los primeros 10 registros
+                        const limitedRecords = sortedRecords.slice(0, 10);
+    
+                        // Renderizar filas de la tabla
+                        limitedRecords.forEach(record => {
+                            const parallelDipsRM = calculateRM(record.paralel_dips_weight, record.paralel_dips);
+                            const pullUpRM = calculateRM(record.pull_up_weight, record.pull_up);
+    
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${record.user}</td>
+                                <td>${record.pull_up}</td>
+                                <td>${record.pull_up_weight}</td>
+                                <td>${pullUpRM}</td>
+                                <td>${record.paralel_dips}</td>
+                                <td>${record.paralel_dips_weight}</td>
+                                <td>${parallelDipsRM}</td>
+                            `;
+                            tableBody.appendChild(row);
+                        });
+                    } else {
+                        console.error('Elemento tableBody no encontrado en el DOM.');
+                    }
+                })
+                .catch(error => console.error('Error al realizar la solicitud:', error));
         });
     });
-
-    document.getElementById('dateFilter').addEventListener('change', function() {
-        const filterDate = this.value;
-        // Aquí puedes agregar el código necesario para filtrar por fecha,
-        // dependiendo de cómo tienes configurada la fecha en el modelo.
-    });
-</script>
+        </script>
 
 {% endblock %}
 

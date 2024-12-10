@@ -2,7 +2,7 @@
 <html lang="es">
 {% load static %}
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XGRIPX - Calistenia</title>
     <link rel="shortcut icon" href={% static "imgs/favicon.ico"%} />
@@ -11,13 +11,17 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href={% static 'css/style.css' %}>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Barra lateral (Navbar) -->
-    <div class="d-flex flex-column flex-shrink-0 p-3 bg-dark sidebar" style="width: 220px;">
-        <h2 class="text-white text-center">X-GRIP-X</h2>
-        <ul class="nav nav-pills flex-column mb-auto">
+    <div id="navbar" class="d-flex flex-column flex-shrink-0 p-3 bg-dark sidebar" style="width: 220px;">
+        <h2 id="navbar-tittle"class="text-white text-center ">X-GRIP-X</h2>
+        <!--barra de navegación (items)-->
+        <ul id="items-navbar"class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
                 <a href="{% url 'inicio' %}" class="nav-link text-white">Inicio</a>
             </li>
@@ -31,27 +35,43 @@
                 <a href={%url 'ver_horarios'%} class="nav-link text-white">Galería</a>
             </li>
             <li>
-                <a href={% url 'reservar' %} class="nav-link text-white">Reserva una clase GRATIS</a>
+                <a href={% url 'reservar' %} class="nav-link text-white">Reservá una clase GRATIS</a>
             </li>
+
             {%if user.is_authenticated%}
-            <li>
-                <a href={% url 'profile' %} class="nav-link text-white">Ver Tu Perfil</a>
-            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Mi Cuenta
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href={%url "profile"%}>Perfil</a></li>
+                  <li><a class="dropdown-item" href={%url "account_logout"%}>Cerrar sesión</a></li>
+                </ul>
+              </li>
+              {%else%}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Cuenta
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href={%url "account_login"%}>Inicia sesión</a></li>
+                  <li><a class="dropdown-item" href={%url "account_signup"%}>Registrate</a></li>
+                </ul>
+              </li>
             {%endif%}
-        </ul>
+    </ul>
+    <img id="logo-navbar" src={% static "imgs/favicon.ico" %} alt="logo-reducido" />
     </div>
     <div class="content-wrapper">
-        {% block content %}
-        {% endblock %}
-    </div>
-    <!-- Sección de logos -->
-    <div class="container logos my-5 d-flex justify-content-between align-items-center">
-        <!-- Logo del equipo -->
-        <img src={% static "imgs/favicon.ico" %} alt="Logo GRIPX" class="img-thumbnail" style="width: 150px; height: 80px;">
-        <!-- Logos de patrocinadores -->
-        <div class="sponsors d-flex">
-            <img src="https://via.placeholder.com/150x80" alt="Patrocinador 1" class="img-fluid me-3">
-            <img src="https://via.placeholder.com/150x80" alt="Patrocinador 2" class="img-fluid">
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+        {% if request.path == '/' %}
+        <div id='info' class="content container mt-4 text-start fs-3 w-60">
+        {% include "info.html" %}
+            </div>
+            {% endif %}
         </div>
     </div>
     <!-- Footer con redes sociales y formulario de contacto -->

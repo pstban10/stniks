@@ -10,8 +10,18 @@ SEX_CHOICES = [
 
 
 class Persona(models.Model):
+    name = models.CharField(max_length=50, null=False, blank=False)
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+class Usuario(models.Model):
     user = models.OneToOneField(
-        User, verbose_name="Usuario", on_delete=models.CASCADE)
+        User,
+        verbose_name="Usuario",
+        on_delete=models.CASCADE)
+    name = models.ForeignKey(Persona, on_delete=models.CASCADE)
     sex = models.CharField(max_length=1, choices=SEX_CHOICES)
     age = models.IntegerField()
 
@@ -44,5 +54,28 @@ class PrData(models.Model):
     skater_squat = models.IntegerField(null=True, blank=True)
     skater_squat_weight = models.FloatField(null=True, blank=True)
 
+    # formula de Brzycki: 1RM = Peso / (1.0278 - (0.0278 x Repeticiones))
+    def maxRepParalelDips(self):
+        if isinstance(self.paralel_dips, (int, float)) and isinstance(self.paralel_dips_weight, (int, float)):
+            dips_max = int(int(self.paralel_dips_weight) /
+                           (1.0278 - (0.0278 * int(self.paralel_dips))))
+            return dips_max
+        return 0
+
+    def maxRepPullUp(self):
+        if isinstance(self.pull_up, (int, float)) and isinstance(self.pull_up_weight, (int, float)):
+            pull_max = int(int(self.pull_up_weight) /
+                           (1.0278-(0.0278 * int(self.pull_up))))
+            return pull_max
+        return 0
+
     def __str__(self):
-        return f"los RM's de {self.user.user.username}"
+        return f"Numeros de {self.user.name}"
+
+
+class Records(models.Model):
+    user = models.ForeignKey(Persona, on_delete=models.CASCADE)
+    records = models.ForeignKey(PrData, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"los Pr's de {self.user.name}"

@@ -2,23 +2,23 @@
     {%block content%}
     {%load static%}
     <!-- Slider de imágenes -->
-    <div id="carouselExample" class="carousel slide slider" data-bs-ride="carousel">
+    <div id="carousel" class="carousel slide slider" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src={% static "imgs/recursos1.jpg" %} class="d-block w-100" alt="Imagen 1" />
+                <img src={% static "imgs/recursos1.jpg" %} class="d-block w-100 h-40" alt="Imagen 1" />
             </div>
             <div class="carousel-item">
-                <img src={% static "imgs/recursos2.jpg" %} class="d-block w-100" alt="Imagen 2" />
+                <img src={% static "imgs/recursos2.jpg" %} class="d-block w-100 h-40" alt="Imagen 2" />
             </div>
             <div class="carousel-item">
-                <img src={% static "imgs/recursos3.jpg" %} class="d-block w-100" alt="Imagen 3" />
+                <img src={% static "imgs/recursos3.jpg" %} class="d-block w-100 h-40" alt="Imagen 3" />
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
