@@ -1,6 +1,6 @@
 # Archivos y carpetas que tengo en local y que planeo ignorar
 env/
-static/imgs
+# static/imgs
 lienzo.py
 leeme.txt
 work_in_progress.txt
